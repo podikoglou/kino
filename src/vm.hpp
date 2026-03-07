@@ -9,4 +9,6 @@ private:
 
 public:
   VM();
+
+  void reset();
 };
