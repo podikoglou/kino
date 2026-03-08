@@ -36,6 +36,15 @@ void VM::execute() {
   const uint8_t opcode = (instruction & 0xFF000000) >> 24;
 
   switch (opcode) {
+  case OP_PUSHC: {
+    // TODO: types
+    uint32_t val = instruction & 0x00FFFFFF;
+
+    this->stack.push(val);
+
+    break;
+  }
+
   case OP_PUSHV: {
     uint32_t name = instruction & 0x00FFFFFF;
 
