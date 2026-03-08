@@ -25,6 +25,7 @@ public:
 
   void fetch();
   void execute();
+  void pc_inc();
 
   uint8_t operator[](int idx) const;
 

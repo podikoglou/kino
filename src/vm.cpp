@@ -24,6 +24,8 @@ void VM::execute() {}
 
 void VM::reset() { this->memory.fill(0x00); }
 
+void VM::pc_inc() { this->pc += 4; }
+
 uint8_t VM::operator[](int idx) const { return this->memory[idx]; }
 
 size_t VM::memory_size() const { return MEMORY_SIZE; }
