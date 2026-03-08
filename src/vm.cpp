@@ -11,9 +11,9 @@ void VM::execute() {}
 
 void VM::reset() { this->memory.fill(0x00); }
 
-uint8_t VM::operator[](int idx) { return this->memory[idx]; }
+uint8_t VM::operator[](int idx) const { return this->memory[idx]; }
 
-const size_t VM::memory_size() { return MEMORY_SIZE; }
+size_t VM::memory_size() const { return MEMORY_SIZE; }
 
 void VM::load_program(std::vector<uint8_t> program) {
   // ensure program is not too long

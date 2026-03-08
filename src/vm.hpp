@@ -26,9 +26,9 @@ public:
   void fetch();
   void execute();
 
-  uint8_t operator[](int idx);
+  uint8_t operator[](int idx) const;
 
-  const size_t memory_size();
+  size_t memory_size() const;
 
   void load_program(std::vector<uint8_t> program);
 };
