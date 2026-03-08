@@ -5,8 +5,8 @@
 #include <cstdint>
 #include <vector>
 
-#define MEMORY_SIZE 2048
-#define MAX_PROGRAM_SIZE 128
+constexpr size_t MEMORY_SIZE = 2048;
+constexpr size_t MAX_PROGRAM_SIZE = 128;
 
 class VM {
 public:
