@@ -5,6 +5,10 @@
 
 VM::VM() { this->reset(); }
 
+void VM::fetch() { this->ir = this->memory[this->pc]; }
+
+void VM::execute() {}
+
 void VM::reset() { this->memory.fill(0x00); }
 
 uint8_t VM::operator[](int idx) { return this->memory[idx]; }

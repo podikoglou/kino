@@ -1,6 +1,7 @@
 #pragma once
 
 #include <array>
+#include <cstddef>
 #include <cstdint>
 #include <vector>
 
@@ -11,9 +12,19 @@ class VM {
 public:
   std::array<uint8_t, MEMORY_SIZE> memory;
 
+  // an index to `memory`, pointing to the current instruction
+  size_t pc;
+
+  // the instruction currently being executed is stored here
+  // invariant: this should be memory[pc]
+  uint8_t ir;
+
   VM();
 
   void reset();
+
+  void fetch();
+  void execute();
 
   uint8_t operator[](int idx);
 
