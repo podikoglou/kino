@@ -14,5 +14,7 @@ public:
 
   void reset();
 
+  uint8_t operator[](int idx);
+
   const size_t memory_size();
 };
