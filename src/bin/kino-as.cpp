@@ -1,12 +1,45 @@
+#include "../vm.hpp"
+#include <cstdint>
 #include <cstdio>
 #include <cstdlib>
 #include <format>
 #include <fstream>
 #include <iostream>
 #include <iterator>
+#include <ostream>
 
 std::string read_stream(std::istream &stream) {
   return std::string(std::istreambuf_iterator<char>(stream), {});
+}
+
+void emit_uint32(std::ostream &stream, uint32_t val) {}
+
+void emit_pushc(std::ostream &stream, uint32_t val) {
+  emit_uint32(stream, (OP_PUSHC << 24) | (val & 0x00FFFFFF));
+}
+
+void emit_pushv(std::ostream &stream, uint32_t name) {
+  emit_uint32(stream, (OP_PUSHV << 24) | (name & 0x00FFFFFF));
+}
+
+void emit_store(std::ostream &stream, uint32_t name) {
+  emit_uint32(stream, (OP_STORE << 24) | (name & 0x00FFFFFF));
+}
+
+void emit_add(std::ostream &stream, uint32_t a, uint32_t b) {
+  emit_uint32(stream, (OP_ADD << 24));
+}
+
+void emit_sub(std::ostream &stream, uint32_t a, uint32_t b) {
+  emit_uint32(stream, (OP_SUB << 24));
+}
+
+void emit_mult(std::ostream &stream, uint32_t a, uint32_t b) {
+  emit_uint32(stream, (OP_MULT << 24));
+}
+
+void emit_div(std::ostream &stream, uint32_t a, uint32_t b) {
+  emit_uint32(stream, (OP_DIV << 24));
 }
 
 int main(int argc, char **argv) {
