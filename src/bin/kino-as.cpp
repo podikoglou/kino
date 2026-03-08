@@ -32,21 +32,10 @@ void emit_store(std::ostream &stream, uint32_t name) {
   emit_uint32(stream, (OP_STORE << 24) | (name & 0x00FFFFFF));
 }
 
-void emit_add(std::ostream &stream, uint32_t a, uint32_t b) {
-  emit_uint32(stream, (OP_ADD << 24));
-}
-
-void emit_sub(std::ostream &stream, uint32_t a, uint32_t b) {
-  emit_uint32(stream, (OP_SUB << 24));
-}
-
-void emit_mult(std::ostream &stream, uint32_t a, uint32_t b) {
-  emit_uint32(stream, (OP_MULT << 24));
-}
-
-void emit_div(std::ostream &stream, uint32_t a, uint32_t b) {
-  emit_uint32(stream, (OP_DIV << 24));
-}
+void emit_add(std::ostream &stream) { emit_uint32(stream, (OP_ADD << 24)); }
+void emit_sub(std::ostream &stream) { emit_uint32(stream, (OP_SUB << 24)); }
+void emit_mult(std::ostream &stream) { emit_uint32(stream, (OP_MULT << 24)); }
+void emit_div(std::ostream &stream) { emit_uint32(stream, (OP_DIV << 24)); }
 
 int main(int argc, char **argv) {
   if (argc < 2) {
