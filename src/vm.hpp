@@ -17,7 +17,7 @@ public:
 
   // the instruction currently being executed is stored here
   // invariant: this should be memory[pc]
-  uint8_t ir;
+  uint32_t ir;
 
   VM();
 

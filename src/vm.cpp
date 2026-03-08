@@ -1,11 +1,24 @@
 #include "vm.hpp"
+#include <cassert>
+#include <cstdint>
 #include <format>
 #include <iterator>
 #include <stdexcept>
 
 VM::VM() { this->reset(); }
 
-void VM::fetch() { this->ir = this->memory[this->pc]; }
+void VM::fetch() {
+  // this invariant should always be true, since we don't load programs after a
+  // certain address (128 as of writing)
+  assert(this->memory_size() > this->pc + 3);
+
+  uint8_t a = static_cast<uint32_t>(this->memory[this->pc]);
+  uint8_t b = static_cast<uint32_t>(this->memory[this->pc + 1]);
+  uint8_t c = static_cast<uint32_t>(this->memory[this->pc + 2]);
+  uint8_t d = static_cast<uint32_t>(this->memory[this->pc + 3]);
+
+  this->ir = d | (c << 8) | (b << 16) | (a << 24);
+}
 
 void VM::execute() {}
 
