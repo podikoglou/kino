@@ -54,8 +54,8 @@ void VM::execute() {
     this->stack.pop();
 
     try {
-      uint32_t a = std::get<uint32_t>(value_a);
-      uint32_t b = std::get<uint32_t>(value_b);
+      const uint32_t a = std::get<uint32_t>(value_a);
+      const uint32_t b = std::get<uint32_t>(value_b);
 
       uint32_t result;
 
