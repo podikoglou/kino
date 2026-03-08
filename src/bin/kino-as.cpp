@@ -12,7 +12,13 @@ std::string read_stream(std::istream &stream) {
   return std::string(std::istreambuf_iterator<char>(stream), {});
 }
 
-void emit_uint32(std::ostream &stream, uint32_t val) {}
+void emit_uint32(std::ostream &stream, uint32_t val) {
+
+  stream << ((val & 0xFF000000) >> 24);
+  stream << ((val & 0x00FF0000) >> 16);
+  stream << ((val & 0x0000FF00) >> 8);
+  stream << (val & 0x000000FF);
+}
 
 void emit_pushc(std::ostream &stream, uint32_t val) {
   emit_uint32(stream, (OP_PUSHC << 24) | (val & 0x00FFFFFF));
