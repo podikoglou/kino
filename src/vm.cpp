@@ -34,23 +34,22 @@ void VM::execute() {
   const uint32_t instruction = this->ir;
   const uint8_t opcode = (instruction & 0xFF000000) >> 24;
 
-  value value_a, value_b;
 
   switch (opcode) {
   case OP_ADD:
   case OP_SUB:
   case OP_MULT:
-  case OP_DIV:
+  case OP_DIV: {
     if (this->stack.size() < 2) {
       throw std::runtime_error(
           "not enough values to operate on (must have at least 2)");
     }
 
     // pop two values from the stack
-    value_a = this->stack.top();
+    value value_a = this->stack.top();
     this->stack.pop();
 
-    value_b = this->stack.top();
+    value value_b = this->stack.top();
     this->stack.pop();
 
     try {
@@ -83,6 +82,7 @@ void VM::execute() {
     }
 
     break;
+  }
 
   default:
     throw std::runtime_error(
