@@ -8,10 +8,9 @@
 #define MAX_PROGRAM_SIZE 128
 
 class VM {
-private:
+public:
   std::array<uint8_t, MEMORY_SIZE> memory;
 
-public:
   VM();
 
   void reset();
