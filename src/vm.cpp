@@ -1,6 +1,7 @@
 #include "vm.hpp"
 #include <cassert>
 #include <cstdint>
+#include <exception>
 #include <format>
 #include <iterator>
 #include <stdexcept>
@@ -34,8 +35,21 @@ void VM::execute() {
   const uint32_t instruction = this->ir;
   const uint8_t opcode = (instruction & 0xFF000000) >> 24;
 
-
   switch (opcode) {
+  case OP_PUSHV: {
+    uint32_t name = instruction & 0x00FFFFFF;
+
+    try {
+      value val = this->kv[name];
+
+      this->stack.push(val);
+    } catch (const std::exception &exception) {
+      throw std::runtime_error("unknown variable");
+    }
+
+    break;
+  }
+
   case OP_ADD:
   case OP_SUB:
   case OP_MULT:
