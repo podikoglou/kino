@@ -118,6 +118,8 @@ void VM::execute() {
         std::format("invalid opcode: {:#x} (full instruction: {:#x})", opcode,
                     instruction));
   }
+
+  this->pc_inc();
 }
 
 void VM::reset() { this->memory.fill(0x00); }
