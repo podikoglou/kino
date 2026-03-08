@@ -20,7 +20,17 @@ void VM::fetch() {
   this->ir = d | (c << 8) | (b << 16) | (a << 24);
 }
 
-void VM::execute() {}
+void VM::execute() {
+  const uint32_t instruction = this->ir;
+  const uint8_t opcode = (instruction & 0xFF000000) >> 24;
+
+  switch (opcode) {
+  default:
+    throw std::runtime_error(
+        std::format("invalid opcode: {:#x} (full instruction: {:#x})", opcode,
+                    instruction));
+  }
+}
 
 void VM::reset() { this->memory.fill(0x00); }
 
