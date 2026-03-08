@@ -5,7 +5,6 @@
 #include <cstddef>
 #include <cstdint>
 #include <stack>
-#include <string>
 #include <unordered_map>
 #include <vector>
 
@@ -16,7 +15,7 @@ class VM {
 public:
   std::array<uint8_t, MEMORY_SIZE> memory;
 
-  std::unordered_map<std::string, value> kv;
+  std::unordered_map<uint32_t, value> kv;
   std::stack<value> stack;
 
   // an index to `memory`, pointing to the current instruction
