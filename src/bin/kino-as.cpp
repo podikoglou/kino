@@ -13,11 +13,10 @@ std::string read_stream(std::istream &stream) {
 }
 
 void emit_uint32(std::ostream &stream, uint32_t val) {
-
-  stream << ((val & 0xFF000000) >> 24);
-  stream << ((val & 0x00FF0000) >> 16);
-  stream << ((val & 0x0000FF00) >> 8);
-  stream << (val & 0x000000FF);
+  stream.put((val & 0xFF000000) >> 24);
+  stream.put((val & 0x00FF0000) >> 16);
+  stream.put((val & 0x0000FF00) >> 8);
+  stream.put(val & 0x000000FF);
 }
 
 void emit_pushc(std::ostream &stream, uint32_t val) {
