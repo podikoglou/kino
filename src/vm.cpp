@@ -50,6 +50,21 @@ void VM::execute() {
     break;
   }
 
+  case OP_STORE: {
+    if (this->stack.size() < 1) {
+      throw std::runtime_error("no value to operate on");
+    }
+
+    uint32_t name = instruction & 0x00FFFFFF;
+
+    value val = this->stack.top();
+    this->stack.pop(); // NOTE: should we?
+
+    this->kv[name] = val;
+
+    break;
+  }
+
   case OP_ADD:
   case OP_SUB:
   case OP_MULT:
