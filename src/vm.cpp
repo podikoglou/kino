@@ -20,6 +20,10 @@ void VM::fetch() {
   uint8_t d = static_cast<uint32_t>(this->memory[this->pc + 3]);
 
   this->ir = d | (c << 8) | (b << 16) | (a << 24);
+
+  if (this->ir == 0x00) {
+    throw std::runtime_error("couldn't fetch next instruction (all zeroes)");
+  }
 }
 
 void VM::execute() {
