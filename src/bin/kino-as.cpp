@@ -15,33 +15,38 @@
 // - preprocess
 //    - implement FNV-1 and hash variable names
 
+#define EMITTER(name, params...) void name(std::ostream &stream, params)
+
+#define EMITTER_0(name, opcode)                                                \
+  void name(std::ostream &stream) { emit_uint32(stream, (opcode << 24)); }
+
 std::string read_stream(std::istream &stream) {
   return std::string(std::istreambuf_iterator<char>(stream), {});
 }
 
-void emit_uint32(std::ostream &stream, uint32_t val) {
+EMITTER(emit_uint32, uint32_t val) {
   stream.put((val & 0xFF000000) >> 24);
   stream.put((val & 0x00FF0000) >> 16);
   stream.put((val & 0x0000FF00) >> 8);
   stream.put(val & 0x000000FF);
 }
 
-void emit_pushc(std::ostream &stream, uint32_t val) {
+EMITTER(emit_pushc, uint32_t val) {
   emit_uint32(stream, (OP_PUSHC << 24) | (val & 0x00FFFFFF));
 }
 
-void emit_pushv(std::ostream &stream, uint32_t name) {
+EMITTER(emit_pushv, uint32_t name) {
   emit_uint32(stream, (OP_PUSHV << 24) | (name & 0x00FFFFFF));
 }
 
-void emit_store(std::ostream &stream, uint32_t name) {
+EMITTER(emit_store, uint32_t name) {
   emit_uint32(stream, (OP_STORE << 24) | (name & 0x00FFFFFF));
 }
 
-void emit_add(std::ostream &stream) { emit_uint32(stream, (OP_ADD << 24)); }
-void emit_sub(std::ostream &stream) { emit_uint32(stream, (OP_SUB << 24)); }
-void emit_mult(std::ostream &stream) { emit_uint32(stream, (OP_MULT << 24)); }
-void emit_div(std::ostream &stream) { emit_uint32(stream, (OP_DIV << 24)); }
+EMITTER_0(emit_add, OP_ADD);
+EMITTER_0(emit_sub, OP_SUB);
+EMITTER_0(emit_mult, OP_MULT);
+EMITTER_0(emit_div, OP_DIV);
 
 int main(int argc, char **argv) {
   if (argc < 2) {
