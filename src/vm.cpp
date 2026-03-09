@@ -111,6 +111,7 @@ void VM::execute() {
       }
 
       // push back to stack
+      this->stack.push(result);
     } catch (const std::bad_variant_access &ex) {
       throw std::runtime_error(std::format("type mismatch"));
     }
