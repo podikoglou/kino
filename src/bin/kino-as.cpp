@@ -8,6 +8,13 @@
 #include <iterator>
 #include <ostream>
 
+// TODO:
+// - lex assembly
+// - create ast structures
+// - parse into ast
+// - preprocess
+//    - implement FNV-1 and hash variable names
+
 std::string read_stream(std::istream &stream) {
   return std::string(std::istreambuf_iterator<char>(stream), {});
 }
