@@ -4,6 +4,7 @@
 #include <exception>
 #include <format>
 #include <iterator>
+#include <stack>
 #include <stdexcept>
 #include <variant>
 
@@ -126,7 +127,16 @@ void VM::execute() {
   this->pc_inc();
 }
 
-void VM::reset() { this->memory.fill(0x00); }
+void VM::reset() {
+  this->memory.fill(0x00);
+  this->pc = 0;
+  this->ir = 0;
+
+  while (!this->stack.empty())
+    this->stack.pop();
+
+  this->kv.clear();
+}
 
 void VM::pc_inc() { this->pc += 4; }
 
