@@ -51,5 +51,14 @@ int main(int argc, char **argv) {
     contents = read_stream(stream);
   }
 
+  emit_pushc(std::cout, 4);
+  emit_store(std::cout, 49);
+
+  emit_pushv(std::cout, 49);
+  emit_pushv(std::cout, 49);
+  emit_mult(std::cout);
+
+  emit_store(std::cout, 50);
+
   return EXIT_SUCCESS;
 }
