@@ -12,3 +12,5 @@ constexpr uint8_t OP_ADD = 0x06;
 constexpr uint8_t OP_SUB = 0x07;
 constexpr uint8_t OP_MULT = 0x08;
 constexpr uint8_t OP_DIV = 0x09;
+
+const uint8_t extract_opcode(Instruction instruction);

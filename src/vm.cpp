@@ -29,8 +29,8 @@ void VM::fetch() {
 }
 
 void VM::execute() {
-  const uint32_t instruction = this->ir;
-  const uint8_t opcode = (instruction & 0xFF000000) >> 24;
+  const Instruction instruction = this->ir;
+  const uint8_t opcode = extract_opcode(instruction);
 
   switch (opcode) {
   case OP_PUSHC: {
