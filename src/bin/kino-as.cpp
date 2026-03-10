@@ -1,4 +1,4 @@
-#include "../vm.hpp"
+#include "../isa.hpp"
 #include <cstdint>
 #include <cstdio>
 #include <cstdlib>

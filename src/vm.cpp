@@ -1,4 +1,5 @@
 #include "vm.hpp"
+#include "isa.hpp"
 #include <cassert>
 #include <cstdint>
 #include <exception>
