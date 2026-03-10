@@ -14,7 +14,7 @@ VM::VM() { this->reset(); }
 void VM::fetch() {
   // this invariant should always be true, since we don't load programs after a
   // certain address (128 as of writing)
-  assert(this->memory_size() > this->pc + 3);
+  assert(this->memory.size() > this->pc + 3);
 
   uint8_t a = static_cast<uint32_t>(this->memory[this->pc]);
   uint8_t b = static_cast<uint32_t>(this->memory[this->pc + 1]);
@@ -141,10 +141,6 @@ void VM::reset() {
 }
 
 void VM::pc_inc() { this->pc += 4; }
-
-uint8_t VM::operator[](int idx) const { return this->memory[idx]; }
-
-size_t VM::memory_size() const { return MEMORY_SIZE; }
 
 void VM::load_program(std::vector<uint8_t> program) {
   // ensure program is not too long

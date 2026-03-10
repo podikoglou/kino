@@ -33,9 +33,5 @@ public:
   void execute();
   void pc_inc();
 
-  uint8_t operator[](int idx) const;
-
-  size_t memory_size() const;
-
   void load_program(std::vector<uint8_t> program);
 };
