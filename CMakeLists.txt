@@ -16,5 +16,5 @@ add_executable(kino-as src/bin/kino-as.cpp)
 target_link_libraries(kino-as PUBLIC libkino)
 
 add_executable(kino-opt src/bin/kino-opt.cpp)
-target_link_libraries(kino-as PUBLIC libkino)
+target_link_libraries(kino-opt PUBLIC libkino)
 
