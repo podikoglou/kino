@@ -1,16 +1,20 @@
 #pragma once
 
 #include <cstdint>
+#include <string_view>
 
 typedef uint32_t Instruction;
 
 // Documented in ISA.MD
-constexpr uint8_t OP_PUSHC = 0x00;
-constexpr uint8_t OP_PUSHV = 0x01;
-constexpr uint8_t OP_STORE = 0x02;
-constexpr uint8_t OP_ADD = 0x06;
-constexpr uint8_t OP_SUB = 0x07;
-constexpr uint8_t OP_MULT = 0x08;
-constexpr uint8_t OP_DIV = 0x09;
+enum class Opcode : uint8_t {
+  PUSHC = 0x00,
+  PUSHV = 0x01,
+  STORE = 0x02,
+  ADD = 0x06,
+  SUB = 0x07,
+  MULT = 0x08,
+  DIV = 0x09
+};
 
-const uint8_t extract_opcode(Instruction instruction);
+const Opcode extract_opcode(Instruction instruction);
+const std::string_view opcode_name(Opcode opcode);

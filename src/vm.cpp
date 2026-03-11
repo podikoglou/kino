@@ -30,10 +30,10 @@ void VM::fetch() {
 
 void VM::execute() {
   const Instruction instruction = this->ir;
-  const uint8_t opcode = extract_opcode(instruction);
+  const Opcode opcode = extract_opcode(instruction);
 
   switch (opcode) {
-  case OP_PUSHC: {
+  case Opcode::PUSHC: {
     // TODO: types
     uint32_t val = instruction & 0x00FFFFFF;
 
@@ -42,7 +42,7 @@ void VM::execute() {
     break;
   }
 
-  case OP_PUSHV: {
+  case Opcode::PUSHV: {
     uint32_t name = instruction & 0x00FFFFFF;
 
     try {
@@ -56,7 +56,7 @@ void VM::execute() {
     break;
   }
 
-  case OP_STORE: {
+  case Opcode::STORE: {
     if (this->stack.size() < 1) {
       throw std::runtime_error("no value to operate on");
     }
@@ -71,10 +71,10 @@ void VM::execute() {
     break;
   }
 
-  case OP_ADD:
-  case OP_SUB:
-  case OP_MULT:
-  case OP_DIV: {
+  case Opcode::ADD:
+  case Opcode::SUB:
+  case Opcode::MULT:
+  case Opcode::DIV: {
     if (this->stack.size() < 2) {
       throw std::runtime_error(
           "not enough values to operate on (must have at least 2)");
@@ -97,17 +97,20 @@ void VM::execute() {
 
       // perform actual calculation
       switch (opcode) {
-      case OP_ADD:
+      case Opcode::ADD:
         result = a + b;
         break;
-      case OP_SUB:
+      case Opcode::SUB:
         result = a - b;
         break;
-      case OP_MULT:
+      case Opcode::MULT:
         result = a * b;
         break;
-      case OP_DIV:
+      case Opcode::DIV:
         result = a / b;
+        break;
+      default:
+        // unreachable
         break;
       }
 
@@ -122,8 +125,8 @@ void VM::execute() {
 
   default:
     throw std::runtime_error(
-        std::format("invalid opcode: {:#x} (full instruction: {:#x})", opcode,
-                    instruction));
+        std::format("invalid opcode: {:} (full instruction: {:#x})",
+                    opcode_name(opcode), instruction));
   }
 
   this->pc_inc();
