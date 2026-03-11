@@ -15,7 +15,7 @@ class VM {
 public:
   std::array<uint8_t, MEMORY_SIZE> memory;
 
-  std::unordered_map<uint32_t, value> kv;
+  std::unordered_map<uint64_t, value> kv;
   std::stack<value> stack;
 
   // an index to `memory`, pointing to the current instruction
