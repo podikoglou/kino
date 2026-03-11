@@ -32,21 +32,24 @@ EMITTER(emit_uint32, uint32_t val) {
 }
 
 EMITTER(emit_pushc, uint32_t val) {
-  emit_uint32(stream, (OP_PUSHC << 24) | (val & 0x00FFFFFF));
+  emit_uint32(stream, (static_cast<uint32_t>(Opcode::PUSHC) << 24) |
+                          (val & 0x00FFFFFF));
 }
 
 EMITTER(emit_pushv, uint32_t name) {
-  emit_uint32(stream, (OP_PUSHV << 24) | (name & 0x00FFFFFF));
+  emit_uint32(stream, (static_cast<uint32_t>(Opcode::PUSHV) << 24) |
+                          (name & 0x00FFFFFF));
 }
 
 EMITTER(emit_store, uint32_t name) {
-  emit_uint32(stream, (OP_STORE << 24) | (name & 0x00FFFFFF));
+  emit_uint32(stream, (static_cast<uint32_t>(Opcode::STORE) << 24) |
+                          (name & 0x00FFFFFF));
 }
 
-EMITTER_0(emit_add, OP_ADD);
-EMITTER_0(emit_sub, OP_SUB);
-EMITTER_0(emit_mult, OP_MULT);
-EMITTER_0(emit_div, OP_DIV);
+EMITTER_0(emit_add, static_cast<uint32_t>(Opcode::ADD));
+EMITTER_0(emit_sub, static_cast<uint32_t>(Opcode::SUB));
+EMITTER_0(emit_mult, static_cast<uint32_t>(Opcode::MULT));
+EMITTER_0(emit_div, static_cast<uint32_t>(Opcode::DIV));
 
 int main(int argc, char **argv) {
   if (argc < 2) {
