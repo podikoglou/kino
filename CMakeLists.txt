@@ -18,3 +18,7 @@ target_link_libraries(kino-as PUBLIC libkino)
 add_executable(kino-opt src/bin/kino-opt.cpp)
 target_link_libraries(kino-opt PUBLIC libkino)
 
+add_executable(kino-enumerate src/bin/kino-enumerate.cpp)
+target_link_libraries(kino-enumerate PUBLIC libkino)
+
+
